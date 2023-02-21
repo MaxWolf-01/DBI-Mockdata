@@ -22,14 +22,14 @@ class MyFakeGenerator(FakeRecordGenerator):
         return {
             "id": idx,
             "first_name": faker.first_name(),
-            "grade": np.random.choice("12345", p=[0.1, 0.2, 0.4, 0.2, 0.1]),
+            "grade": np.random.choice(list("12345"), p=[0.1, 0.2, 0.4, 0.2, 0.1]),
             "class": exrex.getone("[1-5][A-C](HIF|FIT|HKUI|HBGM)"),
         }
 
 f = MyFakeGenerator()
 CSVExporter.export(
     records=f.records(n_records=10),
-    headers=f.generate_record(0).keys(),
+    headers=f.generate_record(0).keys(),  # column names for csv
     path=Path("out", "my_file.csv")
 )
 ```
